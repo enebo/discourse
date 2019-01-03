@@ -289,7 +289,6 @@ module Jobs
       end
 
       klass.client_push(hash)
-
     else
       # Otherwise execute the job right away
       opts.delete(:delay_for)
