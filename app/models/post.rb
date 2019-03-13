@@ -460,7 +460,7 @@ class Post < ActiveRecord::Base
     ReviewableFlaggedPost.pending.find_by(target: self)
   end
 
-  def hide!(post_action_type, reason = nil)
+  def hide!(post_action_type_id, reason = nil)
     return if hidden?
 
     reason ||= hidden_at ?
@@ -485,7 +485,7 @@ class Post < ActiveRecord::Base
         url: url,
         edit_delay: SiteSetting.cooldown_minutes_after_hiding_posts,
         flag_reason: I18n.t(
-          "flag_reasons.#{post_action_type}",
+          "flag_reasons.#{PostActionType.types[post_action_type_id]}",
           locale: SiteSetting.default_locale,
           base_path: Discourse.base_path
         )
