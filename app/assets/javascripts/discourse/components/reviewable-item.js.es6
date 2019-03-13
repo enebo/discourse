@@ -18,11 +18,6 @@ export default Ember.Component.extend({
     return type.dasherize();
   },
 
-  @computed("reviewable.score")
-  displayScore(score) {
-    return score.toFixed(1);
-  },
-
   // Find a component to render, if one exists. For example:
   // `ReviewableUser` will return `reviewable-user`
   @computed("reviewable.type")

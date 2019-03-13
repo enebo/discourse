@@ -4354,6 +4354,9 @@ en:
       delete_and_agree:
         title: "Delete Post and Agree with flag"
         description: "Delete post; if the first post, delete the topic as well"
+      disagree_and_restore:
+        title: "Disagree and Restore Post"
+        description: "Restore the post so that all users can see it."
       disagree:
         title: "Disagree"
       ignore:

@@ -8,7 +8,7 @@
     <div class='created-at'>
       {{#link-to 'review.show' reviewable.id}}{{age-with-tooltip reviewable.created_at}}{{/link-to}}
     </div>
-    <div class='score' title={{i18n "review.scores.score"}}>{{displayScore}}</div>
+    <div class='score' title={{i18n "review.scores.score"}}>{{format-score reviewable.score}}</div>
 
     <div class='status'>
       {{#if reviewable.approved}}
