@@ -1,5 +1,5 @@
 import { registerUnbound } from "discourse-common/lib/helpers";
 
 registerUnbound("format-score", function(score) {
-  return (score || 0).toFixed(1);
+  return I18n.toNumber(score || 0, { precision: 1 });
 });
