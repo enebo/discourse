@@ -9,6 +9,11 @@ export default Ember.Controller.extend({
   reviewables: null,
   topic_id: null,
 
+  init(...args) {
+    this._super(...args);
+    this.set("min_score", this.siteSettings.min_score_default_visibility);
+  },
+
   @computed
   allTypes() {
     return ["flagged_post", "queued_post", "user"].map(type => {
