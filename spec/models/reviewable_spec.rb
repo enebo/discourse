@@ -136,6 +136,17 @@ RSpec.describe Reviewable, type: :model do
 
   end
 
+  it "valid_types returns the appropriate types" do
+    expect(Reviewable.valid_type?('ReviewableUser')).to eq(true)
+    expect(Reviewable.valid_type?('ReviewableQueuedPost')).to eq(true)
+    expect(Reviewable.valid_type?('ReviewableFlaggedPost')).to eq(true)
+    expect(Reviewable.valid_type?(nil)).to eq(false)
+    expect(Reviewable.valid_type?("")).to eq(false)
+    expect(Reviewable.valid_type?("Reviewable")).to eq(false)
+    expect(Reviewable.valid_type?("ReviewableDoesntExist")).to eq(false)
+    expect(Reviewable.valid_type?("User")).to eq(false)
+  end
+
   context "events" do
     let!(:moderator) { Fabricate(:moderator) }
     let(:reviewable) { Fabricate(:reviewable) }

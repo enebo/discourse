@@ -54,6 +54,13 @@ class Reviewable < ActiveRecord::Base
     where("score >= ?", SiteSetting.min_score_default_visibility)
   end
 
+  def self.valid_type?(type)
+    return false unless type =~ /^Reviewable[A-Za-z]+$/
+    type.constantize <= Reviewable
+  rescue NameError
+    false
+  end
+
   # Create a new reviewable, or if the target has already been reviewed return it to the
   # pending state and re-use it.
   #

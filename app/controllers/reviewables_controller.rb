@@ -10,9 +10,7 @@ class ReviewablesController < ApplicationController
     offset = params[:offset].to_i
 
     if params[:type].present?
-      unless ['ReviewableUser', 'ReviewableQueuedPost', 'ReviewableFlaggedPost'].include?(params[:type])
-        raise Discourse::InvalidParameter.new(:type)
-      end
+      raise Discourse::InvalidParameter.new(:type) unless Reviewable.valid_type?(params[:type])
     end
 
     status = (params[:status] || 'pending').to_sym
