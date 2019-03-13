@@ -27,7 +27,7 @@ class ReviewablesController < ApplicationController
       type: params[:type]
     }
 
-    total_rows = Reviewable.list_for(current_user, filters)
+    total_rows = Reviewable.list_for(current_user, filters).count
     reviewables = Reviewable.list_for(current_user, filters.merge(limit: PER_PAGE, offset: offset)).to_a
 
     # This is a bit awkward, but ActiveModel serializers doesn't seem to serialize STI. Note `hash`
@@ -40,12 +40,11 @@ class ReviewablesController < ApplicationController
         (hash['actions'] || []).uniq!
         result
       end,
-      meta: filters.merge(
-        total_rows_reviewables: total_rows,
-        load_more_reviewables: review_path(offset: offset + PER_PAGE, min_score: min_score),
-        types: meta_types,
-      )
+      meta: filters.merge(total_rows_reviewables: total_rows, types: meta_types)
     }
+    if (offset + PER_PAGE) < total_rows
+      json[:meta][:load_more_reviewables] = review_path(filters.merge(offset: offset + PER_PAGE))
+    end
     json.merge!(hash)
 
     render_json_dump(json, rest_serializer: true)

@@ -266,8 +266,10 @@ class Reviewable < ActiveRecord::Base
   )
     min_score ||= SiteSetting.min_score_default_visibility
 
+    order = (status == :pending) ? 'score DESC, created_at DESC' : 'created_at DESC'
+
     return [] if user.blank?
-    result = viewable_by(user).where(status: statuses[status])
+    result = viewable_by(user, order: order).where(status: statuses[status])
     result = result.where(type: type) if type
     result = result.where(category_id: category_id) if category_id
     result = result.where(topic_id: topic_id) if topic_id
