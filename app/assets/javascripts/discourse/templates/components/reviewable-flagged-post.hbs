@@ -47,7 +47,7 @@
               ignored=rs.agree_stats.ignored}}
           </td>
           <td>{{rs.score_type.title}}</td>
-          <td>{{rs.score}}</td>
+          <td>{{format-score rs.score}}</td>
         </tr>
         {{#if rs.reviewable_conversation}}
           <tr>
