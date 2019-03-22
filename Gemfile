@@ -96,7 +96,8 @@ gem 'rake'
 
 gem 'thor', require: false
 gem 'rinku', platform: :mri # FIXME: JRuby needs something
-gem 'sanitize', platform: :mri # FIXME: JRuby needs something
+config = RUBY_ENGINE == 'jruby' ? ['= 2.1.1'] : []
+gem 'sanitize', *config
 gem 'sidekiq'
 gem 'mini_scheduler'
 
