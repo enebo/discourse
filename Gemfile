@@ -36,7 +36,7 @@ gem 'redis-namespace'
 
 gem 'active_model_serializers', '~> 0.8.3'
 
-gem 'onebox', '1.8.77'
+gem 'onebox', '1.8.77', platform: :mri # FIXME: no onebox support for jruby...
 
 gem 'http_accept_language', '~>2.0.5', require: false
 
@@ -56,8 +56,7 @@ gem 'rails_multisite'
 
 gem 'fast_xs', platform: :mri
 
-# may move to xorcist post: https://github.com/fny/xorcist/issues/4
-gem 'fast_xor', platform: :mri
+gem 'xorcist', '= 1.0.1'
 
 gem 'fastimage'
 
@@ -84,16 +83,20 @@ gem 'omniauth-github'
 gem 'omniauth-oauth2', require: false
 
 gem 'omniauth-google-oauth2'
-gem 'oj'
-gem 'pg'
-gem 'mini_sql'
+gem 'oj', '= 3.6.6' #, git: 'https://github.com/enebo/oj.git'
+gem 'pg', platform: :mri
+gem 'activerecord-jdbcpostgresql-adapter', platform: :jruby
+options = RUBY_ENGINE == 'jruby' ?
+            {platform: :jruby, git: 'https://github.com/enebo/mini_sql.git'} :
+            {plafform: :mri }
+gem 'mini_sql', **options
 gem 'pry-rails', require: false
 gem 'r2', '~> 0.2.5', require: false
 gem 'rake'
 
 gem 'thor', require: false
-gem 'rinku'
-gem 'sanitize'
+gem 'rinku', platform: :mri # FIXME: JRuby needs something
+gem 'sanitize', platform: :mri # FIXME: JRuby needs something
 gem 'sidekiq'
 gem 'mini_scheduler'
 
@@ -101,7 +104,10 @@ gem 'mini_scheduler'
 gem 'tilt', require: false
 
 gem 'execjs', require: false
-gem 'mini_racer'
+options = RUBY_ENGINE == 'jruby' ?
+            {platform: :jruby, git: 'https://github.com/enebo/mini_racer.git'} :
+            {plafform: :mri }
+gem 'mini_racer', **options
 gem 'highline', '~> 1.7.0', require: false
 gem 'rack-protection' # security
 
@@ -133,15 +139,15 @@ group :test, :development do
   gem 'shoulda', require: false
   gem 'rspec-html-matchers'
   gem 'pry-nav'
-  gem 'byebug', require: ENV['RM_INFO'].nil?
+  gem 'byebug', require: ENV['RM_INFO'].nil?, platform: :mri
   gem 'rubocop', require: false
 end
 
 group :development do
-  gem 'ruby-prof', require: false
+  gem 'ruby-prof', require: false, platform: :mri
   gem 'bullet', require: !!ENV['BULLET']
   gem 'better_errors'
-  gem 'binding_of_caller'
+  gem 'binding_of_caller', platform: :mri
   gem 'annotate'
   gem 'foreman', require: false
 end
@@ -174,7 +180,7 @@ gem 'ruby-readability', require: false
 gem 'stackprof', require: false, platform: :mri
 gem 'memory_profiler', require: false, platform: :mri
 
-gem 'cppjieba_rb', require: false
+gem 'cppjieba_rb', require: false, platform: :mri # FIXME: JRuby likely needs this
 
 gem 'lograge', require: false
 gem 'logstash-event', require: false
