@@ -8,7 +8,7 @@ require 'rubygems'
 require 'bundler/setup'
 
 # in development do some fussing around, to automate config
-if !ARGV.include?("-E") &&
+if RUBY_ENGINE != 'jruby' && !ARGV.include?("-E") &&
     !ARGV.include?("--env") &&
     (ENV["RAILS_ENV"] == "development" || !ENV["RAILS_ENV"])
 
@@ -45,4 +45,5 @@ if ARGV.include?("--help")
   exit
 end
 
-load Gem.bin_path('unicorn', 'unicorn')
+#load Gem.bin_path('unicorn', 'unicorn')
+load Gem.bin_path('puma', 'puma')
