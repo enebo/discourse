@@ -1,6 +1,8 @@
 development:
   prepared_statements: false
   adapter: postgresql
+  user: <%= ENV['USER'] %>
+  password: <%= ENV['PASSWORD'] %>
   database: <%= ENV['DISCOURSE_DEV_DB'] || 'discourse_development' %>
   min_messages: warning
   pool: 5
@@ -17,9 +19,11 @@ development:
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
+  user: <%= ENV['USER'] %>
+  password: <%= ENV['PASSWORD'] %>
   prepared_statements: false
   adapter: postgresql
-  database: "discourse_test<%= ENV['MULTISITE'] ? '_' + ENV['MULTISITE'] : '' %>"
+  database: "discourse_development<%= ENV['MULTISITE'] ? '_' + ENV['MULTISITE'] : '' %>"
   min_messages: warning
   pool: 5
   timeout: 5000
