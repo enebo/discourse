@@ -38,7 +38,8 @@ Discourse::Application.configure do
 
   BetterErrors::Middleware.allow_ip! ENV['TRUSTED_IP'] if ENV['TRUSTED_IP']
 
-  config.load_mini_profiler = true
+  config.load_mini_profiler = RUBY_ENGINE != "jruby"
+  config.load_onebox = false
 
   require 'middleware/turbo_dev'
   config.middleware.insert 0, Middleware::TurboDev
@@ -46,7 +47,7 @@ Discourse::Application.configure do
   config.middleware.insert 1, Middleware::MissingAvatars
 
   config.enable_anon_caching = false
-  require 'rbtrace'
+  require 'rbtrace' unless RUBY_ENGINE == 'jruby'
 
   if emails = GlobalSetting.developer_emails
     config.developer_emails = emails.split(",").map(&:downcase).map(&:strip)
