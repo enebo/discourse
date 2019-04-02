@@ -28,7 +28,7 @@ class CorrectPostActionIndex < ActiveRecord::Migration[4.2]
                    pa.targets_topic = pa2.targets_topic"
 
     puts
-    puts ">> DELETED #{x.cmd_tuples} invalid rows from post_actions"
+    puts ">> DELETED #{RUBY_ENGINE == 'jruby' ? x : x.cmd_tuples} invalid rows from post_actions"
     puts
 
     add_index :post_actions,

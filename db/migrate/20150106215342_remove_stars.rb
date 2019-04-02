@@ -11,7 +11,7 @@ class RemoveStars < ActiveRecord::Migration[4.2]
         pa.post_action_type_id = 1
     WHERE pa.post_id IS NULL AND tu.starred
 SQL
-   puts "#{r.cmd_tuples} stars were converted to bookmarks!"
+   puts "#{RUBY_ENGINE == 'jruby' ? r : r.cmd_tuples} stars were converted to bookmarks!"
 
    execute <<SQL
    DELETE FROM user_actions WHERE action_type = 10

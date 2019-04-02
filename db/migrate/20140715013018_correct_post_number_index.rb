@@ -18,7 +18,8 @@ class CorrectPostNumberIndex < ActiveRecord::Migration[4.2]
                 p1.id <> pp.min_id
       )
 SQL
-    end until a.cmdtuples == 0
+      test = a.respond_to?(:cmdtuples) ? a.cmdtuples : a
+    end until test == 0
 
     remove_index :posts, [:topic_id, :post_number]
     add_index :posts, [:topic_id, :post_number], unique: true
