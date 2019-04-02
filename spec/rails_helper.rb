@@ -4,7 +4,7 @@ if ENV['COVERAGE']
 end
 
 require 'rubygems'
-require 'rbtrace'
+require 'rbtrace' if RUBY_ENGINE != 'jruby'
 
 # Loading more in this block will cause your tests to run faster. However,
 # if you change any configuration or code from libraries loaded here, you'll

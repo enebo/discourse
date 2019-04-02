@@ -289,7 +289,7 @@ module Discourse
       end
     end
 
-    if ENV['RBTRACE'] == "1"
+    if ENV['RBTRACE'] == "1" || RUBY_ENGINE != 'jruby'
       require 'rbtrace'
     end
 
