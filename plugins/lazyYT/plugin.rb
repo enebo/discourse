@@ -13,6 +13,11 @@ register_asset "javascripts/lazyYT.js"
 register_asset "stylesheets/lazyYT.css"
 register_asset "stylesheets/lazyYT_mobile.scss", :mobile
 
+# JRuby Note:
+# Making assumption the css and js code be coded into pages or that js
+# code is maybe loading some dep we need later for other stuff (e.g. jquery?).
+return if RUBY_ENGINE == 'jruby'
+
 # freedom patch YouTube Onebox
 class Onebox::Engine::YoutubeOnebox
   include Onebox::Engine
