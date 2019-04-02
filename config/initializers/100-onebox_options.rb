@@ -1,3 +1,5 @@
+return if Rails.configuration.respond_to?(:load_onebox) && !Rails.configuration.load_onebox
+  
 require_dependency 'twitter_api'
 
 Onebox.options = {
