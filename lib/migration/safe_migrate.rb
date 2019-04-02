@@ -66,7 +66,7 @@ class Migration::SafeMigrate
   end
 
   def self.enable!
-    return if PG::Connection.method_defined?(:exec_migrator_unpatched)
+    return if !PG::Connection.method_defined?(:exec_migrator_unpatched)
 
     PG::Connection.class_eval do
       alias_method :exec_migrator_unpatched, :exec
