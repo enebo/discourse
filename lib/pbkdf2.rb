@@ -9,7 +9,7 @@
 # 3. It does not monkey patch string
 
 require 'openssl'
-require 'xor'
+require 'xorcist'
 
 class Pbkdf2
 
@@ -21,7 +21,7 @@ class Pbkdf2
 
     2.upto(iterations) do
       u = prf(h, password, u)
-     ret.xor!(u)
+     Xorcist.xor!(ret, u)
     end
 
     ret.bytes.map { |b| ("0" + b.to_s(16))[-2..-1] }.join("")
