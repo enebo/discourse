@@ -1,3 +1,6 @@
+# coding: utf-8
+return if RUBY_ENGINE == 'jruby'
+
 # Speeds up #pluck so its about 2.2x faster, importantly makes pluck avoid creation of a slew
 # of AR objects
 #
