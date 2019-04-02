@@ -188,7 +188,7 @@ gem 'logstash-event', require: false
 gem 'logstash-logger', require: false
 gem 'logster'
 
-gem 'sassc', require: false
+gem 'sassc', '= 1.12.1', require: false
 
 gem 'rotp'
 gem 'rqrcode'
