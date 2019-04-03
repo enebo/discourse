@@ -578,7 +578,8 @@ module Discourse
 
   def self.start_connection_reaper
     return if GlobalSetting.connection_reaper_age < 1 ||
-              GlobalSetting.connection_reaper_interval < 1
+              GlobalSetting.connection_reaper_interval < 1 ||
+              RUBY_ENGINE == 'jruby' # should not require objectspace
 
     # this helps keep connection counts in check
     Thread.new do
